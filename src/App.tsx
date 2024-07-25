@@ -36,10 +36,16 @@ function App() {
       } catch (e) {
         console.error(e);
       }
+    }else{
+      setLocalBenchmarks(undefined);
     }
   });
   
-
+function clearBenchMark() {
+  localStorage.removeItem("benchmarks") ;
+  setBenchmarks([]);
+  setLocalBenchmarks(undefined);
+}
   useEffect(() => {
     try {
       const value = JSON.parse(rawInput ?? "");
@@ -126,6 +132,7 @@ function App() {
                 Save
               </Button>
               <Button variant={"ghost"} onClick={() => setRawInput("")}>Clear</Button>
+              <Button variant={"ghost"} onClick={clearBenchMark}>Clear saved benchmark</Button>
             </div>
           </div>
           <Textarea
